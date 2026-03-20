@@ -643,6 +643,135 @@
 
 
         /* ============================================
+           HERO
+           ============================================ */
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        /* Floating geometric shape — slow-rotating hexagon */
+        .hero-geo {
+            position: absolute;
+            top: -60px;
+            right: -180px;
+            width: 280px;
+            height: 280px;
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            transform: rotate(30deg);
+            animation: spin 80s linear infinite;
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+        .hero-geo::before {
+            content: '';
+            position: absolute;
+            inset: 30px;
+            border: 1px solid var(--accent-border);
+            border-radius: var(--radius-md);
+            transform: rotate(15deg);
+        }
+
+        .hero-geo-left {
+            top: auto;
+            bottom: -40px;
+            right: auto;
+            left: -160px;
+            width: 200px;
+            height: 200px;
+            animation-direction: reverse;
+            animation-duration: 100s;
+            opacity: 0.25;
+        }
+
+        .hero-eyebrow {
+            font-family: var(--font-heading);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--accent);
+            margin-bottom: var(--space-xl);
+        }
+
+        .hero-heading {
+            font-size: clamp(2.25rem, 1.8rem + 2vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.12;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--space-lg);
+        }
+
+        .hero-heading .accent {
+            color: var(--accent);
+        }
+
+        .hero-sub {
+            font-size: var(--text-lg);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin-bottom: var(--space-2xl);
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-3xl);
+        }
+
+        /* Trust bar */
+        .hero-trust {
+            display: flex;
+            align-items: center;
+            gap: 0;
+        }
+
+        .hero-trust-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 0 var(--space-xl);
+            position: relative;
+        }
+
+        /* Vertical separator between trust items */
+        .hero-trust-item:not(:last-child)::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 1px;
+            height: 32px;
+            background: var(--border-light);
+        }
+
+        .hero-trust-value {
+            font-family: var(--font-heading);
+            font-size: var(--text-xl);
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-trust-label {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            white-space: nowrap;
+        }
+
+
+        /* ============================================
            SECTION PLACEHOLDERS (visual dev markers)
            ============================================ */
         .section-placeholder {
@@ -676,6 +805,16 @@
             .nav-cta {
                 display: none;
             }
+
+            .hero-geo {
+                right: -120px;
+                width: 200px;
+                height: 200px;
+            }
+
+            .hero-geo-left {
+                display: none;
+            }
         }
 
 
@@ -707,6 +846,38 @@
 
             .section-title {
                 font-size: var(--text-3xl);
+            }
+
+            .hero-heading {
+                font-size: clamp(2rem, 1.5rem + 2vw, 2.5rem);
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .hero-buttons .btn {
+                width: 100%;
+            }
+
+            .hero-trust {
+                flex-direction: column;
+                gap: var(--space-lg);
+            }
+
+            .hero-trust-item {
+                flex-direction: row;
+                gap: var(--space-sm);
+                padding: 0;
+            }
+
+            .hero-trust-item::after {
+                display: none;
+            }
+
+            .hero-geo {
+                display: none;
             }
         }
     </style>
@@ -759,7 +930,54 @@
          ========================================== -->
     <section id="hero">
         <div class="container">
-            <div class="section-placeholder">Hero — будет добавлено</div>
+            <div class="hero-content">
+
+                <!-- Decorative floating shapes -->
+                <div class="hero-geo" aria-hidden="true"></div>
+                <div class="hero-geo hero-geo-left" aria-hidden="true"></div>
+
+                <!-- Eyebrow -->
+                <div class="hero-eyebrow animate-on-load delay-1">
+                    Автоматизация документооборота
+                </div>
+
+                <!-- Heading -->
+                <h1 class="hero-heading animate-on-load delay-2">
+                    Узнайте <span class="accent">стоимость</span> внедрения за&nbsp;2&nbsp;минуты
+                </h1>
+
+                <!-- Subheading -->
+                <p class="hero-sub animate-on-load delay-3">
+                    Пошаговый калькулятор рассчитает бюджет автоматизации документооборота для вашей компании. Без звонков и&nbsp;ожидания.
+                </p>
+
+                <!-- Buttons -->
+                <div class="hero-buttons animate-on-load delay-4">
+                    <a href="#calculator" class="btn btn-primary btn-lg">
+                        Рассчитать стоимость →
+                    </a>
+                    <a href="#cases" class="btn btn-secondary btn-lg">
+                        Посмотреть кейсы
+                    </a>
+                </div>
+
+                <!-- Trust bar -->
+                <div class="hero-trust animate-on-load delay-5">
+                    <div class="hero-trust-item">
+                        <span class="hero-trust-value">500+</span>
+                        <span class="hero-trust-label">внедрений</span>
+                    </div>
+                    <div class="hero-trust-item">
+                        <span class="hero-trust-value">98%</span>
+                        <span class="hero-trust-label">клиентов продлевают</span>
+                    </div>
+                    <div class="hero-trust-item">
+                        <span class="hero-trust-value">от 3 дней</span>
+                        <span class="hero-trust-label">до запуска</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 
