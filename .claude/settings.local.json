@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(awk '/<style>/,/<\\\\/style>/' \"E:\\\\b2b-calculator\\\\index.html\")",
+      "Bash(grep -v \"//\")",
+      "Bash(awk '/<script>/,/<\\\\/script>/' \"E:\\\\b2b-calculator\\\\index.html\")",
+      "Bash(for id:*)",
+      "Bash(do grep:*)",
+      "Bash(echo \"✓ $id\")",
+      "Bash(echo \"✗ MISSING: $id\")",
+      "Bash(done)",
+      "Bash(grep -E \":\\\\s*[^:;]+$\")",
+      "Bash(grep -E \"[a-z-]+:\\\\s*[^:]+$\")",
+      "Bash(grep -v \"^\\\\s*$\")",
+      "Bash(grep -n \";\\\\s*$\")",
+      "Bash(grep -n \":\\\\s*[^;]*$\")",
+      "Bash(grep -v \"{\\\\|}\\\\|^\\\\s*$\\\\|/\\\\*\\\\|^\\\\s*[a-z-]*:\\\\s*[a-z0-9\\\\-]*,\\\\s*$\")",
+      "Bash(node -c \"E:\\\\b2b-calculator\\\\index.html\")"
+    ]
+  }
+}

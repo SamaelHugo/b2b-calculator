@@ -26,4 +26,4 @@ Demo project for web developer portfolio.
 - [x] Calculator result screen
 - [x] Pricing
 - [x] Cases
-- [ ] CTA + Footer
+- [x] CTA + Footer

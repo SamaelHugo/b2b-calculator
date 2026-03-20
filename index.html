@@ -1283,6 +1283,8 @@
             border-radius: var(--radius-md);
             padding: 0.75em 1em;
             outline: none;
+            max-width: 100%;
+            box-sizing: border-box;
             transition: border-color var(--duration-base) var(--ease-out),
                         box-shadow var(--duration-base) var(--ease-out);
         }
@@ -1630,21 +1632,112 @@
 
 
         /* ============================================
-           SECTION PLACEHOLDERS (visual dev markers)
+           CTA SECTION
            ============================================ */
-        .section-placeholder {
+        .cta-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-title {
+            font-family: var(--font-heading);
+            font-size: var(--text-3xl);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.02em;
+        }
+
+        .cta-subtitle {
+            font-size: var(--text-base);
+            color: var(--text-secondary);
+            margin-bottom: var(--space-2xl);
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .cta-buttons {
             display: flex;
             align-items: center;
             justify-content: center;
-            min-height: 200px;
-            border: 1px dashed var(--border-light);
-            border-radius: var(--radius-lg);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+
+        .cta-contact {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+        }
+
+
+        /* ============================================
+           FOOTER
+           ============================================ */
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr;
+            gap: var(--space-3xl);
+            padding-bottom: var(--space-2xl);
+        }
+
+        .footer-brand p {
+            font-size: var(--text-xs);
             color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 280px;
+            margin-top: var(--space-md);
+        }
+
+        .footer-col-title {
             font-family: var(--font-heading);
             font-size: var(--text-sm);
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-lg);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+
+        .footer-link {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        .footer-link:hover {
+            color: var(--accent);
+        }
+
+        /* Bottom bar */
+        .footer-bottom {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-top: var(--space-xl);
+            border-top: 1px solid var(--border-subtle);
+            font-size: var(--text-xs);
+            color: var(--text-muted);
+        }
+
+        .footer-legal {
+            display: flex;
+            gap: var(--space-lg);
+        }
+
+        .footer-legal a {
+            color: var(--text-muted);
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        .footer-legal a:hover {
+            color: var(--text-secondary);
         }
 
 
@@ -1696,6 +1789,10 @@
 
             .case-metrics {
                 gap: var(--space-md);
+            }
+
+            .footer-grid {
+                gap: var(--space-2xl);
             }
         }
 
@@ -1771,7 +1868,7 @@
             }
 
             .calc-box {
-                padding: var(--space-xl);
+                padding: var(--space-lg) var(--space-md);
             }
 
             .calc-question {
@@ -1804,7 +1901,7 @@
             }
 
             .result-form-block {
-                padding: var(--space-lg);
+                padding: var(--space-lg) 16px;
             }
 
             .pricing-grid {
@@ -1824,6 +1921,31 @@
                 max-width: 480px;
                 margin-left: auto;
                 margin-right: auto;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .cta-buttons .btn {
+                width: 100%;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                gap: var(--space-md);
+                text-align: center;
+            }
+
+            .footer-legal {
+                flex-direction: column;
+                gap: var(--space-sm);
             }
         }
     </style>
@@ -2431,7 +2553,15 @@
          ========================================== -->
     <section id="cta">
         <div class="container">
-            <div class="section-placeholder">CTA — будет добавлено</div>
+            <div class="cta-content reveal">
+                <h2 class="cta-title">Готовы автоматизировать документооборот?</h2>
+                <p class="cta-subtitle">Рассчитайте стоимость за 2 минуты или свяжитесь с&nbsp;нами для консультации</p>
+                <div class="cta-buttons">
+                    <a href="#calculator" class="btn btn-primary btn-lg">Рассчитать стоимость →</a>
+                    <a href="#footer" class="btn btn-secondary btn-lg">Связаться с нами</a>
+                </div>
+                <div class="cta-contact">Или позвоните: +7 (495) 123-45-67 · Пн–Пт, 9:00–18:00</div>
+            </div>
         </div>
     </section>
 
@@ -2441,7 +2571,51 @@
          ========================================== -->
     <footer id="footer">
         <div class="container">
-            <div class="section-placeholder">Footer — будет добавлено</div>
+
+            <div class="footer-grid">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <a href="#" class="nav-logo">
+                        <span class="nav-logo-icon">D</span>
+                        DocFlow
+                    </a>
+                    <p>Платформа для автоматизации документооборота. 500+ успешных внедрений с&nbsp;2018&nbsp;года.</p>
+                </div>
+
+                <!-- Product links -->
+                <div>
+                    <div class="footer-col-title">Продукт</div>
+                    <nav class="footer-links">
+                        <a href="#features" class="footer-link">Возможности</a>
+                        <a href="#pricing" class="footer-link">Тарифы</a>
+                        <a href="#cases" class="footer-link">Кейсы</a>
+                        <a href="#calculator" class="footer-link">Калькулятор</a>
+                        <a href="#" class="footer-link">Документация</a>
+                    </nav>
+                </div>
+
+                <!-- Company links -->
+                <div>
+                    <div class="footer-col-title">Компания</div>
+                    <nav class="footer-links">
+                        <a href="#" class="footer-link">О нас</a>
+                        <a href="#cta" class="footer-link">Контакты</a>
+                        <a href="#" class="footer-link">Блог</a>
+                        <a href="#" class="footer-link">Вакансии</a>
+                        <a href="#" class="footer-link">Партнёрам</a>
+                    </nav>
+                </div>
+            </div>
+
+            <!-- Bottom bar -->
+            <div class="footer-bottom">
+                <span>© 2026 DocFlow. Все права защищены.</span>
+                <div class="footer-legal">
+                    <a href="#">Политика конфиденциальности</a>
+                    <a href="#">Условия использования</a>
+                </div>
+            </div>
+
         </div>
     </footer>
 
