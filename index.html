@@ -1394,6 +1394,139 @@
 
 
         /* ============================================
+           PRICING
+           ============================================ */
+        .pricing-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .pricing-header .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+            align-items: start;
+        }
+
+        /* Card */
+        .pricing-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            transition: border-color var(--duration-base) var(--ease-out),
+                        transform var(--duration-base) var(--ease-out),
+                        box-shadow var(--duration-base) var(--ease-out);
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Recommended / highlighted card */
+        .pricing-card.featured {
+            border-color: var(--accent-border);
+            box-shadow: var(--shadow-glow);
+            background: linear-gradient(170deg, var(--bg-tertiary) 0%, var(--bg-elevated) 100%);
+        }
+
+        .pricing-card.featured:hover {
+            box-shadow: 0 0 48px rgba(0, 212, 170, 0.12), var(--shadow-md);
+        }
+
+        .pricing-badge {
+            position: absolute;
+            top: -12px;
+            right: 24px;
+        }
+
+        .pricing-tier {
+            font-family: var(--font-heading);
+            font-size: var(--text-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-md);
+        }
+
+        .pricing-price {
+            font-family: var(--font-heading);
+            font-size: clamp(1.75rem, 1.5rem + 1vw, 2.25rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            letter-spacing: -0.03em;
+            line-height: 1.2;
+        }
+
+        .pricing-period {
+            font-size: var(--text-sm);
+            color: var(--text-tertiary);
+            font-weight: 400;
+            margin-top: 4px;
+            margin-bottom: var(--space-lg);
+        }
+
+        .pricing-divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Feature list */
+        .pricing-features {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-2xl);
+            flex: 1;
+        }
+
+        .pricing-feature {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-sm);
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .pricing-feature-icon {
+            flex-shrink: 0;
+            font-size: var(--text-sm);
+            font-weight: 700;
+            line-height: 1.5;
+            width: 18px;
+            text-align: center;
+        }
+
+        .pricing-feature-icon.check {
+            color: var(--accent);
+        }
+
+        .pricing-feature-icon.dash {
+            color: var(--text-muted);
+        }
+
+        .pricing-feature.disabled {
+            color: var(--text-muted);
+        }
+
+        /* Card CTA */
+        .pricing-card .btn {
+            width: 100%;
+            text-align: center;
+        }
+
+
+        /* ============================================
            SECTION PLACEHOLDERS (visual dev markers)
            ============================================ */
         .section-placeholder {
@@ -1440,6 +1573,14 @@
 
             .calc-box {
                 padding: 36px;
+            }
+
+            .pricing-grid {
+                gap: var(--space-md);
+            }
+
+            .pricing-card {
+                padding: var(--space-xl);
             }
         }
 
@@ -1549,6 +1690,18 @@
 
             .result-form-block {
                 padding: var(--space-lg);
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
+            }
+
+            /* Show recommended card first on mobile */
+            .pricing-card.featured {
+                order: -1;
             }
         }
     </style>
@@ -1924,7 +2077,136 @@
          ========================================== -->
     <section id="pricing">
         <div class="container">
-            <div class="section-placeholder">Тарифы — будет добавлено</div>
+
+            <!-- Header -->
+            <div class="pricing-header reveal">
+                <div class="section-label">Тарифы</div>
+                <h2 class="section-title">Прозрачные тарифы без скрытых платежей</h2>
+                <p class="section-subtitle">Выберите формат, который подходит вашей компании</p>
+            </div>
+
+            <!-- Cards -->
+            <div class="pricing-grid">
+
+                <!-- Старт -->
+                <div class="pricing-card reveal">
+                    <div class="pricing-tier">Старт</div>
+                    <div class="pricing-price">45 000 ₽</div>
+                    <div class="pricing-period">/мес</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>До 50 пользователей</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Базовый документооборот</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Облачное хранение 50 ГБ</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Email-поддержка</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Базовые шаблоны документов</span>
+                        </div>
+                        <div class="pricing-feature disabled">
+                            <span class="pricing-feature-icon dash">—</span>
+                            <span>Без интеграций</span>
+                        </div>
+                        <div class="pricing-feature disabled">
+                            <span class="pricing-feature-icon dash">—</span>
+                            <span>Без аналитики</span>
+                        </div>
+                    </div>
+                    <a href="#calculator" class="btn btn-secondary">Выбрать</a>
+                </div>
+
+                <!-- Бизнес (recommended) -->
+                <div class="pricing-card featured reveal">
+                    <span class="pricing-badge badge">Популярный</span>
+                    <div class="pricing-tier">Бизнес</div>
+                    <div class="pricing-price">120 000 ₽</div>
+                    <div class="pricing-period">/мес</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>До 200 пользователей</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Полный документооборот</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Интеграция с 1С</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Хранение 500 ГБ</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Приоритетная поддержка</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Расширенная аналитика</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Кастомные маршруты согласования</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Поддержка ЭЦП</span>
+                        </div>
+                    </div>
+                    <a href="#calculator" class="btn btn-primary">Выбрать</a>
+                </div>
+
+                <!-- Корпорация -->
+                <div class="pricing-card reveal">
+                    <div class="pricing-tier">Корпорация</div>
+                    <div class="pricing-price">По запросу</div>
+                    <div class="pricing-period">индивидуальный расчёт</div>
+                    <div class="pricing-divider"></div>
+                    <div class="pricing-features">
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Безлимит пользователей</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>On-premise или гибрид</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Выделенный менеджер</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>SLA 99.9%</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Полная кастомизация</span>
+                        </div>
+                        <div class="pricing-feature">
+                            <span class="pricing-feature-icon check">✓</span>
+                            <span>Интеграция с любыми системами</span>
+                        </div>
+                    </div>
+                    <a href="#cta" class="btn btn-secondary">Связаться</a>
+                </div>
+
+            </div>
         </div>
     </section>
 
