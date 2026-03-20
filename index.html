@@ -1527,6 +1527,109 @@
 
 
         /* ============================================
+           CASES
+           ============================================ */
+        .cases-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .cases-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .case-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            display: flex;
+            flex-direction: column;
+            transition: border-color var(--duration-base) var(--ease-out),
+                        transform var(--duration-base) var(--ease-out);
+        }
+
+        .case-card:hover {
+            border-color: var(--border-light);
+            transform: translateY(-3px);
+        }
+
+        /* Metrics row */
+        .case-metrics {
+            display: flex;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+
+        .case-metric {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .case-metric-value {
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            font-weight: 800;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        .case-metric-label {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* Quote */
+        .case-quote {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-xl);
+            flex: 1;
+        }
+
+        .case-divider {
+            height: 1px;
+            background: var(--border-subtle);
+            margin-bottom: var(--space-lg);
+        }
+
+        /* Author row */
+        .case-author {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--space-md);
+        }
+
+        .case-author-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .case-author-company {
+            font-family: var(--font-heading);
+            font-size: var(--text-sm);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .case-author-role {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+        }
+
+        .case-industry {
+            flex-shrink: 0;
+        }
+
+
+        /* ============================================
            SECTION PLACEHOLDERS (visual dev markers)
            ============================================ */
         .section-placeholder {
@@ -1581,6 +1684,18 @@
 
             .pricing-card {
                 padding: var(--space-xl);
+            }
+
+            .cases-grid {
+                gap: var(--space-md);
+            }
+
+            .case-card {
+                padding: var(--space-xl);
+            }
+
+            .case-metrics {
+                gap: var(--space-md);
             }
         }
 
@@ -1702,6 +1817,13 @@
             /* Show recommended card first on mobile */
             .pricing-card.featured {
                 order: -1;
+            }
+
+            .cases-grid {
+                grid-template-columns: 1fr;
+                max-width: 480px;
+                margin-left: auto;
+                margin-right: auto;
             }
         }
     </style>
@@ -2216,7 +2338,90 @@
          ========================================== -->
     <section id="cases">
         <div class="container">
-            <div class="section-placeholder">Кейсы — будет добавлено</div>
+
+            <!-- Header -->
+            <div class="cases-header reveal">
+                <div class="section-label">Кейсы</div>
+                <h2 class="section-title">Результаты наших клиентов</h2>
+            </div>
+
+            <!-- Cards -->
+            <div class="cases-grid">
+
+                <!-- СтальПром -->
+                <div class="case-card reveal">
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value">×3</span>
+                            <span class="case-metric-label">быстрее согласование</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">−40%</span>
+                            <span class="case-metric-label">затрат</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">2 нед.</span>
+                            <span class="case-metric-label">до запуска</span>
+                        </div>
+                    </div>
+                    <p class="case-quote">«Согласование договоров ускорилось в&nbsp;3&nbsp;раза, затраты на бумажный документооборот снизились на&nbsp;40%. Запуск занял всего 2&nbsp;недели.»</p>
+                    <div class="case-divider"></div>
+                    <div class="case-author">
+                        <div class="case-author-info">
+                            <span class="case-author-company">СтальПром</span>
+                            <span class="case-author-role">Директор по ИТ</span>
+                        </div>
+                        <span class="badge case-industry">Производство</span>
+                    </div>
+                </div>
+
+                <!-- ТоргСеть -->
+                <div class="case-card reveal">
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value">5 000+</span>
+                            <span class="case-metric-label">документов/мес</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">10 сек</span>
+                            <span class="case-metric-label">поиск документа</span>
+                        </div>
+                    </div>
+                    <p class="case-quote">«Автоматизировали обработку 5000+ документов в&nbsp;месяц. Время поиска документа сократилось с&nbsp;15&nbsp;минут до&nbsp;10&nbsp;секунд.»</p>
+                    <div class="case-divider"></div>
+                    <div class="case-author">
+                        <div class="case-author-info">
+                            <span class="case-author-company">ТоргСеть</span>
+                            <span class="case-author-role">Операционный директор</span>
+                        </div>
+                        <span class="badge case-industry">Ритейл</span>
+                    </div>
+                </div>
+
+                <!-- ФинГрупп -->
+                <div class="case-card reveal">
+                    <div class="case-metrics">
+                        <div class="case-metric">
+                            <span class="case-metric-value">100%</span>
+                            <span class="case-metric-label">документов на ЭЦП</span>
+                        </div>
+                        <div class="case-metric">
+                            <span class="case-metric-value">0</span>
+                            <span class="case-metric-label">потерянных оригиналов</span>
+                        </div>
+                    </div>
+                    <p class="case-quote">«Полностью перешли на&nbsp;ЭЦП, исключили потерю оригиналов. Аудит действий решил вопрос с&nbsp;регуляторами за&nbsp;месяц.»</p>
+                    <div class="case-divider"></div>
+                    <div class="case-author">
+                        <div class="case-author-info">
+                            <span class="case-author-company">ФинГрупп</span>
+                            <span class="case-author-role">Руководитель юр. отдела</span>
+                        </div>
+                        <span class="badge case-industry">Финансы</span>
+                    </div>
+                </div>
+
+            </div>
         </div>
     </section>
 

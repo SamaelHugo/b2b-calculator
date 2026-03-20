@@ -25,5 +25,5 @@ Demo project for web developer portfolio.
 - [x] Calculator quiz (5 steps)
 - [x] Calculator result screen
 - [x] Pricing
-- [ ] Cases
+- [x] Cases
 - [ ] CTA + Footer
