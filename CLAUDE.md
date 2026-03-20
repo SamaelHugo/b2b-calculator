@@ -23,7 +23,7 @@ Demo project for web developer portfolio.
 - [x] Hero
 - [x] Features
 - [x] Calculator quiz (5 steps)
-- [ ] Calculator result screen
+- [x] Calculator result screen
 - [ ] Pricing
 - [ ] Cases
 - [ ] CTA + Footer
