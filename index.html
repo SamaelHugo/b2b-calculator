@@ -835,6 +835,278 @@
 
 
         /* ============================================
+           CALCULATOR / QUIZ
+           ============================================ */
+        .calc-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .calc-header .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Main calculator container */
+        .calc-box {
+            position: relative;
+            background: linear-gradient(170deg, var(--bg-tertiary) 0%, var(--bg-elevated) 100%);
+            border: 1px solid rgba(0, 212, 170, 0.18);
+            border-radius: var(--radius-xl);
+            padding: 48px;
+            overflow: hidden;
+        }
+
+        /* Subtle glow behind the container */
+        .calc-box::before {
+            content: '';
+            position: absolute;
+            top: -120px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 500px;
+            height: 300px;
+            background: radial-gradient(ellipse, rgba(0, 212, 170, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        /* Progress area */
+        .calc-progress {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-2xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .calc-progress-bar {
+            flex: 1;
+            height: 4px;
+            background: var(--bg-surface);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-right: var(--space-lg);
+        }
+
+        .calc-progress-fill {
+            height: 100%;
+            background: var(--accent);
+            border-radius: 2px;
+            width: 20%;
+            transition: width 0.5s var(--ease-out);
+        }
+
+        .calc-step-counter {
+            font-family: var(--font-heading);
+            font-size: var(--text-xs);
+            font-weight: 600;
+            color: var(--text-tertiary);
+            white-space: nowrap;
+        }
+
+        /* Steps viewport — clips animated steps */
+        .calc-steps {
+            position: relative;
+            overflow: hidden;
+            min-height: 320px;
+            z-index: 1;
+        }
+
+        /* Individual step */
+        .calc-step {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            opacity: 0;
+            transform: translateX(40px);
+            pointer-events: none;
+            transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+        }
+
+        .calc-step.active {
+            position: relative;
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        .calc-step.exit-left {
+            opacity: 0;
+            transform: translateX(-40px);
+        }
+
+        .calc-step.enter-right {
+            transform: translateX(40px);
+            opacity: 0;
+        }
+
+        /* Step question */
+        .calc-question {
+            font-family: var(--font-heading);
+            font-size: var(--text-2xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--space-xl);
+            letter-spacing: -0.01em;
+        }
+
+        /* Options grid */
+        .calc-options {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+
+        .calc-options.single-col {
+            grid-template-columns: 1fr;
+        }
+
+        /* Option card */
+        .calc-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            background: var(--bg-primary);
+            border: 1px solid var(--border-light);
+            border-radius: var(--radius-md);
+            padding: 16px 24px;
+            cursor: pointer;
+            transition: border-color var(--duration-base) var(--ease-out),
+                        background var(--duration-base) var(--ease-out),
+                        transform var(--duration-fast) var(--ease-out);
+            user-select: none;
+            position: relative;
+        }
+
+        .calc-option:hover {
+            border-color: rgba(255, 255, 255, 0.18);
+            background: var(--bg-secondary);
+        }
+
+        .calc-option.selected {
+            border-color: var(--accent-border);
+            background: rgba(0, 212, 170, 0.06);
+        }
+
+        /* Custom radio / checkbox indicator */
+        .calc-option-check {
+            flex-shrink: 0;
+            width: 22px;
+            height: 22px;
+            border-radius: var(--radius-full);
+            border: 2px solid var(--border-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: border-color var(--duration-base) var(--ease-out),
+                        background var(--duration-base) var(--ease-out);
+        }
+
+        .calc-option-check.checkbox {
+            border-radius: var(--radius-sm);
+        }
+
+        .calc-option-check::after {
+            content: '✓';
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--bg-primary);
+            opacity: 0;
+            transform: scale(0.5);
+            transition: opacity var(--duration-fast) var(--ease-out),
+                        transform var(--duration-fast) var(--ease-spring);
+        }
+
+        .calc-option.selected .calc-option-check {
+            border-color: var(--accent);
+            background: var(--accent);
+        }
+
+        .calc-option.selected .calc-option-check::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .calc-option-text {
+            font-family: var(--font-heading);
+            font-size: var(--text-sm);
+            font-weight: 500;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .calc-option-hint {
+            font-size: var(--text-xs);
+            color: var(--text-tertiary);
+            font-weight: 400;
+        }
+
+        /* Navigation buttons */
+        .calc-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: var(--space-2xl);
+            position: relative;
+            z-index: 1;
+        }
+
+        .calc-btn-back {
+            font-family: var(--font-heading);
+            font-size: var(--text-sm);
+            font-weight: 600;
+            color: var(--text-tertiary);
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.6em 1em;
+            transition: color var(--duration-fast) var(--ease-out);
+        }
+
+        .calc-btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        .calc-btn-back.hidden {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .calc-btn-next {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            padding: 0.85em 2em;
+            border-radius: var(--radius-full);
+            border: none;
+            cursor: pointer;
+            background: var(--accent);
+            color: var(--bg-primary);
+            transition: background var(--duration-base) var(--ease-out),
+                        box-shadow var(--duration-base) var(--ease-out),
+                        transform var(--duration-fast) var(--ease-out),
+                        opacity var(--duration-base) var(--ease-out);
+        }
+
+        .calc-btn-next:hover:not(:disabled) {
+            background: var(--accent-hover);
+            box-shadow: 0 0 24px rgba(0, 212, 170, 0.3);
+            transform: translateY(-1px);
+        }
+
+        .calc-btn-next:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .calc-btn-next:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+
+        /* ============================================
            SECTION PLACEHOLDERS (visual dev markers)
            ============================================ */
         .section-placeholder {
@@ -877,6 +1149,10 @@
 
             .hero-geo-left {
                 display: none;
+            }
+
+            .calc-box {
+                padding: 36px;
             }
         }
 
@@ -949,6 +1225,31 @@
 
             .feature-card {
                 padding: var(--space-xl);
+            }
+
+            .calc-box {
+                padding: var(--space-xl);
+            }
+
+            .calc-question {
+                font-size: var(--text-xl);
+            }
+
+            .calc-options {
+                grid-template-columns: 1fr;
+            }
+
+            .calc-steps {
+                min-height: auto;
+            }
+
+            .calc-nav {
+                flex-direction: row;
+                gap: var(--space-md);
+            }
+
+            .calc-btn-next {
+                flex: 1;
             }
         }
     </style>
@@ -1103,7 +1404,161 @@
          ========================================== -->
     <section id="calculator">
         <div class="container">
-            <div class="section-placeholder">Калькулятор-квиз — будет добавлено</div>
+
+            <!-- Section header -->
+            <div class="calc-header reveal">
+                <div class="section-label">Калькулятор</div>
+                <h2 class="section-title">Рассчитайте стоимость внедрения</h2>
+                <p class="section-subtitle">Ответьте на 5 вопросов — получите диапазон бюджета и&nbsp;рекомендации</p>
+            </div>
+
+            <!-- Calculator container -->
+            <div class="calc-box reveal" id="calcBox">
+
+                <!-- Progress -->
+                <div class="calc-progress">
+                    <div class="calc-progress-bar">
+                        <div class="calc-progress-fill" id="calcProgressFill"></div>
+                    </div>
+                    <div class="calc-step-counter" id="calcStepCounter">Шаг 1 из 5</div>
+                </div>
+
+                <!-- Steps viewport -->
+                <div class="calc-steps" id="calcSteps">
+
+                    <!-- Step 1: Company size -->
+                    <div class="calc-step active" data-step="1" data-type="radio" data-key="employees">
+                        <div class="calc-question">Сколько сотрудников в&nbsp;компании?</div>
+                        <div class="calc-options">
+                            <div class="calc-option" data-value="up-to-50">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">До 50</span>
+                            </div>
+                            <div class="calc-option" data-value="50-150">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">50–150</span>
+                            </div>
+                            <div class="calc-option" data-value="150-500">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">150–500</span>
+                            </div>
+                            <div class="calc-option" data-value="500-plus">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">500+</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 2: Processes (multi-select) -->
+                    <div class="calc-step" data-step="2" data-type="checkbox" data-key="processes">
+                        <div class="calc-question">Какие процессы нужно автоматизировать?</div>
+                        <div class="calc-options single-col">
+                            <div class="calc-option" data-value="correspondence">
+                                <span class="calc-option-check checkbox"></span>
+                                <span class="calc-option-text">Входящая/исходящая корреспонденция</span>
+                            </div>
+                            <div class="calc-option" data-value="contracts">
+                                <span class="calc-option-check checkbox"></span>
+                                <span class="calc-option-text">Согласование договоров</span>
+                            </div>
+                            <div class="calc-option" data-value="hr">
+                                <span class="calc-option-check checkbox"></span>
+                                <span class="calc-option-text">Кадровый документооборот</span>
+                            </div>
+                            <div class="calc-option" data-value="internal">
+                                <span class="calc-option-check checkbox"></span>
+                                <span class="calc-option-text">Внутренние заявки и служебные записки</span>
+                            </div>
+                            <div class="calc-option" data-value="archive">
+                                <span class="calc-option-check checkbox"></span>
+                                <span class="calc-option-text">Архивное хранение</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 3: Integration -->
+                    <div class="calc-step" data-step="3" data-type="radio" data-key="integration">
+                        <div class="calc-question">Нужна ли интеграция с&nbsp;другими системами?</div>
+                        <div class="calc-options">
+                            <div class="calc-option" data-value="1c">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Да, с 1С</span>
+                            </div>
+                            <div class="calc-option" data-value="sap-oracle">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Да, с SAP/Oracle</span>
+                            </div>
+                            <div class="calc-option" data-value="multiple">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Да, с несколькими системами</span>
+                            </div>
+                            <div class="calc-option" data-value="none">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Нет, автономная работа</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 4: Deployment -->
+                    <div class="calc-step" data-step="4" data-type="radio" data-key="deployment">
+                        <div class="calc-question">Какой формат внедрения предпочитаете?</div>
+                        <div class="calc-options single-col">
+                            <div class="calc-option" data-value="cloud">
+                                <span class="calc-option-check"></span>
+                                <div>
+                                    <span class="calc-option-text">Облако (SaaS)</span>
+                                    <div class="calc-option-hint">Быстрый старт, минимум инфраструктуры</div>
+                                </div>
+                            </div>
+                            <div class="calc-option" data-value="on-premise">
+                                <span class="calc-option-check"></span>
+                                <div>
+                                    <span class="calc-option-text">На серверах компании (on-premise)</span>
+                                    <div class="calc-option-hint">Полный контроль и безопасность данных</div>
+                                </div>
+                            </div>
+                            <div class="calc-option" data-value="hybrid">
+                                <span class="calc-option-check"></span>
+                                <div>
+                                    <span class="calc-option-text">Гибридный вариант</span>
+                                    <div class="calc-option-hint">Баланс гибкости и контроля</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Step 5: Timeline -->
+                    <div class="calc-step" data-step="5" data-type="radio" data-key="timeline">
+                        <div class="calc-question">Какие сроки запуска?</div>
+                        <div class="calc-options">
+                            <div class="calc-option" data-value="asap">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Как можно скорее (1–2 недели)</span>
+                            </div>
+                            <div class="calc-option" data-value="month">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">В течение месяца</span>
+                            </div>
+                            <div class="calc-option" data-value="quarter">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">В течение квартала</span>
+                            </div>
+                            <div class="calc-option" data-value="exploring">
+                                <span class="calc-option-check"></span>
+                                <span class="calc-option-text">Пока изучаем, сроки гибкие</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Navigation -->
+                <div class="calc-nav">
+                    <button class="calc-btn-back hidden" id="calcBack">← Назад</button>
+                    <button class="calc-btn-next" id="calcNext" disabled>Далее →</button>
+                </div>
+
+            </div>
         </div>
     </section>
 
@@ -1222,6 +1677,162 @@
                 }
             });
         });
+
+
+        /* ============================================
+           Quiz Calculator
+           ============================================ */
+        (() => {
+            const TOTAL_STEPS = 5;
+            let currentStep = 1;
+            const answers = {};
+
+            // DOM refs
+            const stepsContainer = document.getElementById('calcSteps');
+            const progressFill = document.getElementById('calcProgressFill');
+            const stepCounter = document.getElementById('calcStepCounter');
+            const btnBack = document.getElementById('calcBack');
+            const btnNext = document.getElementById('calcNext');
+            const allSteps = stepsContainer.querySelectorAll('.calc-step');
+
+            // Get step element by number
+            const getStep = (n) => stepsContainer.querySelector(`.calc-step[data-step="${n}"]`);
+
+            // Update progress bar and counter
+            const updateProgress = () => {
+                const pct = (currentStep / TOTAL_STEPS) * 100;
+                progressFill.style.width = pct + '%';
+                stepCounter.textContent = `Шаг ${currentStep} из ${TOTAL_STEPS}`;
+            };
+
+            // Update back button visibility
+            const updateBackBtn = () => {
+                btnBack.classList.toggle('hidden', currentStep === 1);
+            };
+
+            // Update next button state (disabled if no selection)
+            const updateNextBtn = () => {
+                const step = getStep(currentStep);
+                const key = step.dataset.key;
+                const type = step.dataset.type;
+
+                let hasSelection = false;
+                if (type === 'radio') {
+                    hasSelection = !!answers[key];
+                } else {
+                    hasSelection = Array.isArray(answers[key]) && answers[key].length > 0;
+                }
+
+                btnNext.disabled = !hasSelection;
+                btnNext.textContent = currentStep === TOTAL_STEPS
+                    ? 'Рассчитать стоимость'
+                    : 'Далее →';
+            };
+
+            // Transition between steps
+            const goToStep = (from, to) => {
+                const fromEl = getStep(from);
+                const toEl = getStep(to);
+                const goingForward = to > from;
+
+                // Animate out
+                fromEl.classList.remove('active');
+                fromEl.classList.add(goingForward ? 'exit-left' : 'enter-right');
+
+                // Prepare incoming step
+                toEl.classList.remove('exit-left', 'enter-right');
+                toEl.classList.add(goingForward ? 'enter-right' : 'exit-left');
+
+                // Force reflow, then animate in
+                void toEl.offsetWidth;
+                toEl.classList.remove('exit-left', 'enter-right');
+                toEl.classList.add('active');
+
+                // Clean up outgoing step after transition
+                setTimeout(() => {
+                    fromEl.classList.remove('exit-left', 'enter-right');
+                }, 450);
+
+                currentStep = to;
+                updateProgress();
+                updateBackBtn();
+                updateNextBtn();
+            };
+
+            // Restore selections on a step (when navigating back)
+            const restoreSelections = (stepEl) => {
+                const key = stepEl.dataset.key;
+                const type = stepEl.dataset.type;
+                const options = stepEl.querySelectorAll('.calc-option');
+
+                options.forEach(opt => {
+                    const val = opt.dataset.value;
+                    if (type === 'radio') {
+                        opt.classList.toggle('selected', answers[key] === val);
+                    } else {
+                        opt.classList.toggle('selected',
+                            Array.isArray(answers[key]) && answers[key].includes(val));
+                    }
+                });
+            };
+
+            // Handle option clicks (delegated)
+            stepsContainer.addEventListener('click', (e) => {
+                const option = e.target.closest('.calc-option');
+                if (!option) return;
+
+                const step = option.closest('.calc-step');
+                const type = step.dataset.type;
+                const key = step.dataset.key;
+                const value = option.dataset.value;
+
+                if (type === 'radio') {
+                    // Deselect siblings, select this one
+                    step.querySelectorAll('.calc-option').forEach(o => o.classList.remove('selected'));
+                    option.classList.add('selected');
+                    answers[key] = value;
+                } else {
+                    // Toggle checkbox
+                    option.classList.toggle('selected');
+                    if (!Array.isArray(answers[key])) answers[key] = [];
+                    if (option.classList.contains('selected')) {
+                        answers[key].push(value);
+                    } else {
+                        answers[key] = answers[key].filter(v => v !== value);
+                    }
+                }
+
+                updateNextBtn();
+            });
+
+            // Next button
+            btnNext.addEventListener('click', () => {
+                if (btnNext.disabled) return;
+
+                if (currentStep < TOTAL_STEPS) {
+                    const nextStep = currentStep + 1;
+                    restoreSelections(getStep(nextStep));
+                    goToStep(currentStep, nextStep);
+                } else {
+                    // Step 5 → show results (placeholder: dispatch custom event)
+                    document.dispatchEvent(new CustomEvent('quiz:complete', { detail: answers }));
+                }
+            });
+
+            // Back button
+            btnBack.addEventListener('click', () => {
+                if (currentStep > 1) {
+                    const prevStep = currentStep - 1;
+                    restoreSelections(getStep(prevStep));
+                    goToStep(currentStep, prevStep);
+                }
+            });
+
+            // Initial state
+            updateProgress();
+            updateBackBtn();
+            updateNextBtn();
+        })();
     </script>
 </body>
 </html>
