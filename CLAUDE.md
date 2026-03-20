@@ -21,7 +21,7 @@ Demo project for web developer portfolio.
 ## Progress
 - [x] Design system + nav
 - [x] Hero
-- [ ] Features
+- [x] Features
 - [ ] Calculator quiz (5 steps)
 - [ ] Calculator result screen
 - [ ] Pricing

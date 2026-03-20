@@ -772,6 +772,69 @@
 
 
         /* ============================================
+           FEATURES
+           ============================================ */
+        .features-header {
+            text-align: center;
+            margin-bottom: var(--space-3xl);
+        }
+
+        .features-header .section-subtitle {
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-lg);
+        }
+
+        .feature-card {
+            background: var(--bg-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 36px;
+            transition: border-color var(--duration-base) var(--ease-out),
+                        transform var(--duration-base) var(--ease-out),
+                        box-shadow var(--duration-base) var(--ease-out);
+        }
+
+        .feature-card:hover {
+            border-color: var(--accent-border);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .feature-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 52px;
+            height: 52px;
+            border-radius: var(--radius-md);
+            background: var(--accent-muted);
+            font-size: 24px;
+            margin-bottom: var(--space-lg);
+            color: var(--accent);
+            line-height: 1;
+        }
+
+        .feature-card h4 {
+            font-size: var(--text-lg);
+            font-weight: 700;
+            margin-bottom: var(--space-sm);
+            letter-spacing: -0.01em;
+        }
+
+        .feature-card p {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            line-height: 1.65;
+        }
+
+
+        /* ============================================
            SECTION PLACEHOLDERS (visual dev markers)
            ============================================ */
         .section-placeholder {
@@ -878,6 +941,14 @@
 
             .hero-geo {
                 display: none;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .feature-card {
+                padding: var(--space-xl);
             }
         }
     </style>
@@ -987,7 +1058,42 @@
          ========================================== -->
     <section id="features">
         <div class="container">
-            <div class="section-placeholder">Возможности — будет добавлено</div>
+
+            <!-- Section header -->
+            <div class="features-header reveal">
+                <div class="section-label">Возможности</div>
+                <h2 class="section-title">Что вы получите после внедрения</h2>
+                <p class="section-subtitle">Полный цикл автоматизации — от входящих документов до&nbsp;аналитики</p>
+            </div>
+
+            <!-- 2×2 grid -->
+            <div class="features-grid">
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon" aria-hidden="true">&#x2709;</div>
+                    <h4>Электронный документооборот</h4>
+                    <p>Входящие, исходящие, внутренние документы в&nbsp;единой системе. Согласование в&nbsp;3&nbsp;раза быстрее.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon" aria-hidden="true">&#x26A1;</div>
+                    <h4>Автоматизация процессов</h4>
+                    <p>Маршруты согласования, автоназначение задач, контроль сроков без ручного труда.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon" aria-hidden="true">&#x2637;</div>
+                    <h4>Аналитика и отчёты</h4>
+                    <p>Дашборды по срокам, загрузке сотрудников и&nbsp;узким местам. Данные в&nbsp;реальном времени.</p>
+                </div>
+
+                <div class="feature-card reveal">
+                    <div class="feature-icon" aria-hidden="true">&#x2616;</div>
+                    <h4>Безопасность и доступ</h4>
+                    <p>Ролевая модель, ЭЦП, аудит действий. Соответствие 152-ФЗ и&nbsp;требованиям регуляторов.</p>
+                </div>
+
+            </div>
         </div>
     </section>
 
